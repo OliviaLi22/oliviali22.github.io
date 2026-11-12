@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "dist"
 CONFIG = json.loads((ROOT / "site.json").read_text(encoding="utf-8"))
 SITE_URL = CONFIG["site_url"].rstrip("/")
-PRIVATE_PREFIXES = ("/journal/", "/film/", "/photography/")
+PRIVATE_PREFIXES = ("/film/", "/photography/")
 LANGUAGE = "en"
 MISSING_TRANSLATIONS: set[str] = set()
 
@@ -178,7 +178,7 @@ def link(path: str, label: str, css: str = "text-link") -> str:
 
 
 NAV = [
-    ("/work/", "Work"), ("/journal/", "Journal"), ("/film/", "Film notes"),
+    ("/work/", "Work"), ("/journal/", "Research Notes"), ("/film/", "Film notes"),
     ("/photography/", "Photography"), ("/about/", "About"), ("/contact/", "Contact"),
 ]
 
@@ -205,9 +205,9 @@ def shell(title: str, description: str, path: str, body: str, active: str = "", 
         if not re.fullmatch(r"[a-f0-9]{64}", password_hash):
             raise ValueError("site.json needs a SHA-256 hash for the personal gate")
         body = f'''<section class="gate-screen wrap" id="gate-screen" role="main" aria-labelledby="gate-title" data-hash="{password_hash}">
-          <p class="eyebrow">The personal notebook / private</p>
+          <p class="eyebrow">Personal archive / private</p>
           <h2 id="gate-title">A quieter<br><em>corner.</em></h2>
-          <p class="gate-intro">Journal, film notes, and photography are behind a small password gate.</p>
+          <p class="gate-intro">Film notes and photography are behind a small password gate.</p>
           <div class="gate-form"><label for="private-password">Password</label>
           <div class="gate-controls"><input id="private-password" type="password" autocomplete="current-password" aria-describedby="gate-error"><button id="unlock-button" type="button">Enter <span aria-hidden="true">↗</span></button></div>
           <p id="gate-error" role="status" aria-live="polite"></p><noscript><p>JavaScript is required to open this section.</p></noscript></div>
@@ -276,7 +276,7 @@ def project_row(item: dict, number: int) -> str:
 
 def entry_card(item: dict, category: str) -> str:
     url = f"/{category}/{item['slug']}/"
-    meta = f"{esc(item.get('category', 'Essay'))} · {pretty_date(item.get('date', ''))} · {reading_time(item['body'])}"
+    meta = f"{esc(item.get('category', 'Research note'))} · {pretty_date(item.get('date', ''))} · {reading_time(item['body'])}"
     return f'''<article class="entry-card"><p class="item-meta">{meta}</p>
       <h3><a href="{url}">{esc(item['title'])}</a></h3>
       <p>{esc(item.get('summary', ''))}</p>{link(url, 'Read the note')}</article>'''
@@ -284,12 +284,8 @@ def entry_card(item: dict, category: str) -> str:
 
 def home(projects: list[dict], journal: list[dict], photos: list[dict]) -> str:
     rows = "".join(project_row(item, i) for i, item in enumerate(projects[:2], 1))
-    if is_private("/journal/"):
-        note = '<div class="private-preview"><span aria-hidden="true">✳</span><p>Personal notes live behind the gate.</p><a href="/journal/">Enter the journal ↗</a></div>'
-        journal_label = "The personal notebook / private"
-    else:
-        note = entry_card(journal[0], "journal") if journal else ""
-        journal_label = "From the journal"
+    note = entry_card(journal[0], "journal") if journal else ""
+    journal_label = "From the research blog"
     if is_private("/photography/"):
         photo_preview = '<div class="private-photo-preview" aria-hidden="true"><span>THE VISUAL NOTEBOOK</span><b>✳</b></div>'
         preview_notice = ""
@@ -315,9 +311,9 @@ def home(projects: list[dict], journal: list[dict], photos: list[dict]) -> str:
         <div class="project-list">{rows}</div><div class="section-end">{link('/work/', 'All work & research')}</div>
       </div></section>
       <section class="section journal-section" aria-labelledby="journal-title"><div class="wrap journal-layout">
-        <div>{section_head('02 / Journal', '<span id="journal-title">A place to think in public.</span>')}
-          <p class="section-intro">Essays, field notes, reading notes, and observations collected with care.</p>
-          {link('/journal/', 'Visit the journal')}</div>
+        <div>{section_head('02 / Research Notes', '<span id="journal-title">Questions behind the numbers.</span>')}
+          <p class="section-intro">Notes on portfolio risk, financial data, modeling choices, and research practice.</p>
+          {link('/journal/', 'Read research notes')}</div>
         <div class="featured-note"><span class="eyebrow">{journal_label}</span>{note}</div>
       </div></section>
       <section class="section film-section"><div class="wrap film-layout"><div><span class="eyebrow">03 / Film notes</span><h2>Some stories stay<br><em>after the credits.</em></h2>
@@ -423,18 +419,18 @@ def project_detail(item: dict) -> str:
 
 def journal_index(items: list[dict]) -> str:
     cards = "".join(entry_card(item, "journal") for item in items)
-    return f'''<main id="main">{page_intro('Journal / 02', 'Notes from<br><em>the margins.</em>', 'A place for longer essays, brief reflections, travel stories, reading notes, and research commentary.')}
-      <section class="wrap content-section"><div class="intro-rule"><span>Latest writing</span><span>Essays & notes</span></div><div class="entry-grid">{cards}</div></section></main>'''
+    return f'''<main id="main">{page_intro('Research Notes / 02', 'Questions behind<br><em>the numbers.</em>', 'A public research blog on portfolio risk, quantitative methods, and financial data.')}
+      <section class="wrap content-section"><div class="intro-rule"><span>Latest notes</span><span>Models & methods</span></div><div class="entry-grid">{cards}</div></section></main>'''
 
 
 def article_detail(item: dict, section: str) -> str:
     is_film = section == "film"
-    back = "Film notes" if is_film else "Journal"
+    back = "Film notes" if is_film else "Research Notes"
     total_text = item["body"] + " " + item.get("spoilers", "")
     if is_film and item.get("status") in ("Awaiting review", "影评待写"):
         meta = "Film note in preparation"
     else:
-        meta = f"{esc(item.get('category', 'Film note' if is_film else 'Essay'))} · {pretty_date(item.get('date', ''))} · {reading_time(total_text)}"
+        meta = f"{esc(item.get('category', 'Film note' if is_film else 'Research note'))} · {pretty_date(item.get('date', ''))} · {reading_time(total_text)}"
     extra = ""
     if is_film:
         film_meta = []
@@ -628,6 +624,33 @@ def check_localization() -> None:
         raise ValueError("Localization validation failed:\n" + "\n".join(problems))
 
 
+def check_section_access() -> None:
+    """Keep the research blog public and the two personal archives gated."""
+    sitemap = (OUT / "sitemap.xml").read_text(encoding="utf-8")
+    problems = []
+    for page in OUT.rglob("*.html"):
+        parts = page.relative_to(OUT).parts
+        lang = "zh" if parts[0] == "zh" else "en"
+        section_parts = parts[1:] if lang == "zh" else parts
+        section = section_parts[0]
+        if section not in ("journal", "film", "photography"):
+            continue
+        base = "/" + "/".join(section_parts[:-1]) + "/"
+        route = "/zh" + base if lang == "zh" else base
+        source = page.read_text(encoding="utf-8")
+        in_sitemap = f"<loc>{SITE_URL + route}</loc>" in sitemap
+        has_gate = 'id="gate-screen"' in source and 'src="/assets/gate.js"' in source
+        has_noindex = 'name="robots" content="noindex' in source
+        if section == "journal":
+            untranslated = lang == "zh" and base in MISSING_TRANSLATIONS
+            if has_gate or has_noindex != untranslated or in_sitemap == untranslated:
+                problems.append(f"{route} must be a public research note, unless its Chinese translation is pending")
+        elif not has_gate or not has_noindex or in_sitemap:
+            problems.append(f"{route} must retain the personal gate and stay out of the sitemap")
+    if problems:
+        raise ValueError("Section access validation failed:\n" + "\n".join(problems))
+
+
 def main() -> None:
     global LANGUAGE
     parser = argparse.ArgumentParser()
@@ -717,7 +740,7 @@ def main() -> None:
         add("/work/", "Work & Research", "Financial risk experience, independent quantitative research, and technical expertise.", work_index(projects, data["roles"], data["expertise"]), "/work/")
         for item in projects:
             add(f"/work/{item['slug']}/", item["title"], item["summary"], project_detail(item), "/work/", "article")
-        add("/journal/", "Journal", "Essays, notes, and observations.", journal_index(journal), "/journal/")
+        add("/journal/", "Research Notes", "A research blog on portfolio risk, quantitative methods, and financial data.", journal_index(journal), "/journal/")
         for item in journal:
             add(f"/journal/{item['slug']}/", item["title"], item["summary"], article_detail(item, "journal"), "/journal/", "article")
         add("/film/", "Film Notes", "Thoughtful notes on cinema.", film_index(films), "/film/")
@@ -734,8 +757,9 @@ def main() -> None:
     if args.check:
         check_links()
         check_localization()
+        check_section_access()
     page_count = sum(1 for _ in OUT.rglob("*.html"))
-    print(f"Built {page_count} pages in {OUT}" + ("; links, locales, and CNAME verified" if args.check else ""))
+    print(f"Built {page_count} pages in {OUT}" + ("; links, locales, section access, and CNAME verified" if args.check else ""))
 
 
 if __name__ == "__main__":

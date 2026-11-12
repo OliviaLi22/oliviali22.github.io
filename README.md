@@ -21,14 +21,14 @@ Content is in paired `content/en/` and `content/zh/` folders. Each `.md` file be
 | Professional experience | Edit `content/{en,zh}/experience.json` | `/work/`, `/zh/work/` |
 | Research projects | Add `content/{en,zh}/work/my-project.md` | `/work/my-project/`, `/zh/work/my-project/` |
 | Technical expertise | Edit `content/{en,zh}/expertise.json` | `/work/`, `/zh/work/` |
-| Journal | Add `content/{en,zh}/journal/my-entry.md` | `/journal/my-entry/`, `/zh/journal/my-entry/` |
+| Research Notes (public blog) | Add `content/{en,zh}/journal/my-entry.md` | `/journal/my-entry/`, `/zh/journal/my-entry/` |
 | Film notes | Add `content/{en,zh}/film/my-film.md` | `/film/my-film/`, `/zh/film/my-film/` |
 | About introduction | Edit `content/{en,zh}/pages/about.md` | `/about/`, `/zh/about/` |
 | About journey | Edit `content/{en,zh}/journey.json` | `/about/`, `/zh/about/` |
 | Beyond Work | Edit `content/{en,zh}/pages/about-beyond.md` | `/about/`, `/zh/about/` |
 | Photography | Add images to `assets/`; edit `content/{en,zh}/photos.json` | `/photography/`, `/zh/photography/` |
 
-The sample journal article is a **layout preview**, not personal writing. The film archive currently lists *Resident Evil* (2026) and *You Can See Everything* (2026) as **awaiting review**, with no invented personal opinions. Copy `content/en/examples/film-note-template.md` to `content/en/film/` when writing a new review, then create its Chinese counterpart in `content/zh/film/`. Only files in the language-specific film folders are published. Portfolio Risk Decision Engine is an implemented research prototype with a verified public repository; Equity Quant Research Platform remains a planned concept without a verified repository. Publish numerical results and charts only when their source data and assumptions can be reviewed.
+Research Notes is a **public, work-related blog** at the existing `/journal/` URLs. The first note explains the methodology of the public Portfolio Risk Decision Engine prototype without claiming performance results. Add further notes on quantitative risk, portfolio analytics, financial data, and research methods in both language folders. The film archive currently lists *Resident Evil* (2026) and *You Can See Everything* (2026) as **awaiting review**, with no invented personal opinions. Copy `content/en/examples/film-note-template.md` to `content/en/film/` when writing a new review, then create its Chinese counterpart in `content/zh/film/`. Only files in the language-specific film folders are published. Equity Quant Research Platform remains a planned concept without a verified repository. Publish numerical results and charts only when their source data and assumptions can be reviewed.
 
 ### English and Chinese
 
@@ -48,19 +48,19 @@ Quantitative Research Methods are kept in the same files. Portfolio Optimization
 
 ### Front matter examples
 
-Journal:
+Research Notes:
 
 ```md
 ---
-title: The title of your essay
-date: 2026-11-11
-category: Essay
-tags: Reading, Research
+title: A specific research question or project note
+date: 2026-11-12
+category: Research note
+tags: Portfolio Risk, Data Analysis
 summary: One clear sentence for cards and search previews.
 ---
 ## Opening section
 
-Your writing begins here.
+State the question, method, evidence, and limitations here.
 ```
 
 Film note:
@@ -101,7 +101,7 @@ Cloudflare's dashboard can report page views, provider-defined unique visitors, 
 
 ## Personal section gate
 
-`/journal/`, `/film/`, and `/photography/` (including their article pages) show a password form. Unlocking one page opens the other two for the current browser tab session via `sessionStorage`; no cookie is set. Work, About, Contact, and the home page remain public. The home page shows generic invitations to the personal sections without previewing their entries or photographs. Protected routes are omitted from `sitemap.xml` and use a `noindex` meta tag.
+`/film/` and `/photography/` (including their article pages) show a password form. Unlocking one opens the other for the current browser tab session via `sessionStorage`; no cookie is set. Research Notes, Work, About, Contact, and the home page are public. The home page previews the latest research note; Film Notes and Photography remain private invitations. Public research notes appear in `sitemap.xml` and have normal indexable metadata. Protected routes are omitted from the sitemap and use a `noindex` meta tag.
 
 The password is represented by a SHA-256 hash in `site.json`, not by the literal password. To change it, run the command below, type the new password when prompted, and paste the printed hash into `personal_gate_sha256`:
 
