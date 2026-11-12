@@ -64,3 +64,59 @@ html[lang="zh-CN"] .hero h1{white-space:normal;font-size:clamp(57px,7vw,106px);l
 html[lang="zh-CN"] .page-intro h1{line-height:1.2}
 html[lang="zh-CN"] .eyebrow,html[lang="zh-CN"] .item-meta,html[lang="zh-CN"] .tag,html[lang="zh-CN"] .main-nav a,html[lang="zh-CN"] .filter-bar button,html[lang="zh-CN"] .text-link{letter-spacing:.04em;text-transform:none}
 @media(max-width:650px){.footer-languages{justify-content:flex-start}html[lang="zh-CN"] .hero h1{font-size:clamp(48px,11vw,70px)}}
+
+/* Work page: a quiet color system, clearer project evidence, lighter skill lists. */
+.work-page-intro{padding-top:56px;padding-bottom:56px}
+.work-page-intro .eyebrow{margin-bottom:17px}
+.work-page-intro h1{font-size:clamp(54px,6.5vw,92px);max-width:1050px;margin-bottom:21px}
+.work-page-intro .page-lede{font-size:clamp(19px,2vw,25px);max-width:760px}
+.work-experience{padding-top:62px}
+.work-experience .work-heading{margin-bottom:39px}
+.experience-areas{display:grid;gap:15px;border-top:0}
+.experience-area{--experience-accent:#78947E;--experience-date:#496d53;grid-template-columns:minmax(190px,.7fr) minmax(0,1.3fr);gap:6%;background:#edf2eb;border-left:3px solid var(--experience-accent);border-bottom:1px solid #d5dfd2;padding:31px 34px}
+.experience-area--terracotta{--experience-accent:#B67D65;--experience-date:#8d5843;background:#f4ece7;border-bottom-color:#e5d6ce}
+.experience-area .timeline-period{color:var(--experience-date);font-size:12px;letter-spacing:.08em;padding:0;margin:0 0 13px}
+.experience-area h3{font-size:clamp(31px,3.3vw,43px)}
+.experience-area-copy>p:first-child{font-size:20px;margin-bottom:21px}
+.experience-focus-line{border-top-color:#bfcbbd}
+.experience-area--terracotta .experience-focus-line{border-top-color:#dcc9bd}
+
+.case-grid{gap:21px}
+.case-card{min-height:0;padding:29px 31px 30px;border-top-color:#78947E}
+.case-card--planned{border-top-color:#a79f8e}
+.case-card-meta{align-items:center;margin-bottom:35px;letter-spacing:.09em}
+.case-status{display:inline-flex;align-items:center;gap:9px;color:var(--muted);font-weight:600;letter-spacing:.06em}
+.case-status::before{content:"";width:7px;height:7px;border-radius:50%;background:#78947E;flex:none}
+.case-card--planned .case-status::before{background:#a79f8e}
+.case-card h3{margin-bottom:25px}
+.case-question{border-top:1px solid var(--line);padding-top:18px;margin-bottom:18px}
+.case-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--muted);margin:0 0 6px}
+.case-question>p:last-child{font-family:var(--serif);font-size:19px;line-height:1.42;color:var(--ink);margin:0}
+.case-summary{font-size:13px;line-height:1.55;color:#5b6a5e;margin:0 0 21px}
+.case-method{border-top:1px solid var(--line);padding-top:15px}
+.case-method>p:last-child{font-size:13px;line-height:1.55;color:#526358;margin:0}
+.case-card-links{display:flex;flex-wrap:wrap;align-items:center;gap:16px 25px;margin-top:auto;padding-top:30px}
+.case-card-links .text-link{margin-top:0}
+
+.expertise-key{border:0;padding:0;max-width:720px;margin-bottom:35px;font-size:12px}
+.expertise-grid{gap:39px 49px}
+.expertise-card{padding-top:21px}
+.expertise-card-top{margin-bottom:21px}
+.skill-group+.skill-group{margin-top:17px}
+.skill-context{margin-bottom:7px}
+.skill-tags{gap:0 1px}
+.skill-tags li{border:0;background:transparent;padding:0;color:#66746a;font-size:13px;line-height:1.75}
+.skill-tags li.is-core{color:#2e4b38;font-weight:700}
+.skill-tags li:not(:last-child)::after{content:"·";color:#9aa99c;margin:0 8px;font-weight:400}
+.skill-tags li a{text-decoration:underline;text-underline-offset:3px}
+.expertise-card--research{grid-column:1/-1;max-width:720px}
+
+.project-pipeline{font-family:var(--sans);border-top:2px solid var(--ink);border-bottom:1px solid var(--line);background:#eff2ea;padding:20px 22px 24px;margin:0 0 43px}
+.project-pipeline .eyebrow{margin:0 0 16px}
+.project-pipeline ol{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:13px;list-style:none;padding:0;margin:0;counter-reset:stage}
+.project-pipeline li{border-top:1px solid #aebfac;padding:9px 0 0;font-family:var(--sans);font-size:11px;line-height:1.45;color:#3c5142;overflow-wrap:anywhere}
+.project-pipeline li::before{display:block;counter-increment:stage;content:"0" counter(stage);color:#69816d;font-size:10px;font-weight:700;letter-spacing:.1em;margin-bottom:7px}
+html[lang="zh-CN"] .case-question>p:last-child{font-family:"Songti SC","Noto Serif CJK SC","Source Han Serif SC","SimSun",serif}
+html[lang="zh-CN"] .case-label,html[lang="zh-CN"] .skill-context{letter-spacing:.04em;text-transform:none}
+@media(max-width:800px){.experience-area{grid-template-columns:190px minmax(0,1fr);gap:28px}.project-pipeline ol{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){.work-page-intro{padding-top:45px;padding-bottom:43px}.work-page-intro h1{font-size:clamp(44px,10vw,66px)}.work-experience{padding-top:52px}.work-experience .work-heading{margin-bottom:29px}.experience-area{display:block;padding:26px 23px 28px}.experience-area-heading{margin-bottom:17px}.experience-area-copy>p:first-child{font-size:19px}.case-card{padding:24px 22px 27px}.case-card-meta{margin-bottom:26px;align-items:flex-start}.case-card h3{font-size:34px;margin-bottom:22px}.case-card-links{gap:15px 22px}.expertise-grid{gap:34px}.skill-tags li{font-size:12px}.project-pipeline ol{grid-template-columns:repeat(2,minmax(0,1fr))}}

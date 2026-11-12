@@ -1,43 +1,43 @@
 ---
 title: Portfolio Risk Decision Engine
-summary: A planned research case study about turning portfolio risk estimates into clear, testable decisions.
-question: How could risk measures and scenario outcomes inform a portfolio decision without obscuring assumptions?
-approach: Planned exposure and downside measures, scenario analysis, constrained optimization, and walk-forward evaluation.
-field: Portfolio risk / analytics
-status: Planned concept
+summary: A Python workflow comparing portfolio risk, historical stress exposure, and constrained rebalancing decisions.
+question: How do tracking error, historical stress losses, concentration, and trading costs affect a rebalancing decision?
+approach: Implemented risk diagnostics, historical stress tests, CVXPY optimization, and a walk-forward strategy comparison.
+field: Portfolio risk / decision support
+status: Research prototype
+stage: prototype
 order: 1
-repository:
+repository: https://github.com/OliviaLi22/portfolio-risk-decision-engine
+pipeline: Validated ETF prices | Risk diagnostics | Stress and optimization | Walk-forward comparison | Reports and dashboard
 ---
 ## Research question
 
-How might a portfolio risk workflow connect exposure estimates, scenario analysis, and explicit decision rules without hiding the assumptions behind a single number?
+How do tracking error, concentration, exposure to past stress periods, and trading costs point toward different choices when rebalancing a portfolio?
 
-## Motivation
+## Why I built it
 
-Risk measures are most useful when their limits are visible. This brief sets out a possible framework for evaluating portfolio choices under different conditions. It is a project direction, not a completed tool.
+A risk estimate is more useful when the decision it informs, and the assumptions behind that decision, are visible. This project builds a reproducible workflow for comparing several objectives rather than treating any one metric as a complete answer. It is an illustrative research system, not a client portfolio or investment recommendation.
 
-## Methodology
+## What is implemented
 
-**Planned:** define a small, reproducible portfolio universe; calculate selected exposure and downside measures; compare decisions across historical or hypothetical scenarios; evaluate constrained portfolio optimization and risk-aware decision rules with a walk-forward design; document where the measures disagree.
+- A Python command-line workflow validates adjusted ETF prices, stores local Parquet data, and computes volatility, tracking error, drawdown, concentration, and asset risk contributions.
+- Historical scenarios use the observed COVID-19 selloff and 2022 equity/bond drawdown windows.
+- A CVXPY optimizer evaluates rebalancing under tracking-error, asset-weight, and turnover limits while accounting for estimated trading costs.
+- A 2023–2025 walk-forward comparison evaluates no rebalancing, a rules-based approach, and optimized decisions using the same held-out dates.
+- Reporting code generates CSV tables, figures, a written decision summary, robustness analyses, and an offline dashboard from local data. Synthetic-fixture tests cover the analytical modules.
 
 ## Data and assumptions
 
-Data sources, asset universe, rebalancing rules, missing-data treatment, and scenario definitions have not been selected. They will be documented before any results are presented.
+The configured illustration holds SPY, QQQ, IWM, IEF, and GLD against an SPY benchmark, using daily market data from 2018 through 2025. Prices come from Yahoo Finance. The portfolio, stress windows, risk budgets, trading costs, and rebalance cadence are explicit configuration choices; they were not calibrated to a client mandate. The full-history diagnostic and walk-forward comparison use different rebalancing conventions, as documented in the repository.
 
-## Implementation
+## Results and visualizations
 
-**Planned:** a Python research pipeline with a clear separation between data preparation, risk estimation, scenario analysis, portfolio optimization, and decision logic. No implementation or repository is linked yet.
+The code generates charts and an offline dashboard after market data are downloaded locally. Data snapshots and generated reports are excluded from the public repository, so no numerical outcome or performance claim is published here. The [methodology notes](https://github.com/OliviaLi22/portfolio-risk-decision-engine/blob/master/docs/implementation_notes.md) and [robustness notes](https://github.com/OliviaLi22/portfolio-risk-decision-engine/blob/master/docs/robustness.md) explain how to interpret the outputs.
 
-## Results and findings
+## Limitations
 
-No results are available. Future visuals could compare exposures and scenario outcomes, with units and assumptions stated beside each chart.
+Yahoo Finance data can contain errors or revisions. The selected ETF universe and historical stress windows are illustrative; the covariance window, constraints, and cost assumptions affect the decisions. The model omits taxes, market impact, liquidity, and intraday execution. Historical walk-forward comparisons cannot establish future performance or crisis protection.
 
-## Limitations and next steps
+## What the work makes clear
 
-Any eventual model will depend on its data, estimation window, scenario design, and transaction assumptions. These limitations will be evaluated against the implemented method.
-
-Next: choose data and a portfolio universe, specify decision rules and costs, then implement and review a walk-forward evaluation before reporting findings.
-
-## Lessons learned
-
-To be completed after the work is carried out and reviewed.
+The documented robustness analysis treats predicted tracking error, realized tracking error, stress exposure, and diversification as separate claims. Improving one does not establish improvement in the others. That distinction is central to reading the engine's decisions responsibly.

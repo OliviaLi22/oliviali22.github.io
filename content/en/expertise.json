@@ -4,30 +4,30 @@
       "title": "Programming & Data Engineering",
       "kind": "toolkit",
       "skills": [
-        {"name": "Python", "evidence": "role"},
-        {"name": "pandas / NumPy", "evidence": "supplied"},
+        {"name": "Python", "evidence": "role", "core": true},
+        {"name": "pandas / NumPy", "evidence": "supplied", "core": true},
         {"name": "Object-Oriented Programming (OOP)", "evidence": "supplied"},
-        {"name": "SQL", "evidence": "role"},
-        {"name": "PySpark", "evidence": "supplied"},
+        {"name": "SQL", "evidence": "role", "core": true},
+        {"name": "PySpark", "evidence": "supplied", "core": true},
         {"name": "Git / Version Control", "evidence": "supplied"},
         {"name": "Jupyter / JupyterHub", "evidence": "supplied"},
-        {"name": "Data processing and reporting automation", "evidence": "supplied"}
+        {"name": "Data processing and reporting automation", "evidence": "supplied", "core": true}
       ]
     },
     {
       "title": "Quantitative Risk & Portfolio Analytics",
       "kind": "toolkit",
       "skills": [
-        {"name": "Market Risk", "evidence": "role"},
-        {"name": "Investment / Portfolio Risk", "evidence": "role"},
-        {"name": "Value at Risk (VaR)", "evidence": "role"},
+        {"name": "Market Risk", "evidence": "role", "core": true},
+        {"name": "Investment / Portfolio Risk", "evidence": "role", "core": true},
+        {"name": "Value at Risk (VaR)", "evidence": "role", "core": true},
         {"name": "Expected Shortfall (ES)", "evidence": "supplied"},
-        {"name": "Stress Testing and Scenario Analysis", "evidence": "role"},
-        {"name": "Tracking Error (TE)", "evidence": "role"},
+        {"name": "Stress Testing and Scenario Analysis", "evidence": "role", "core": true},
+        {"name": "Tracking Error (TE)", "evidence": "role", "core": true},
         {"name": "Sharpe Ratio / Information Ratio (IR)", "evidence": "role"},
-        {"name": "Portfolio Exposure Analysis", "evidence": "role"},
+        {"name": "Portfolio Exposure Analysis", "evidence": "role", "core": true},
         {"name": "Risk Sensitivities", "evidence": "role"},
-        {"name": "P&L Attribution", "evidence": "role"},
+        {"name": "P&L Attribution", "evidence": "role", "core": true},
         {"name": "Risk Monitoring / KRIs", "evidence": "role"},
         {"name": "Portfolio Performance Analytics", "evidence": "supplied"}
       ]
@@ -61,9 +61,9 @@
       "kind": "research",
       "skills": [
         {"name": "Factor Models", "published": false, "source": ""},
-        {"name": "Portfolio Optimization", "published": false, "source": ""},
+        {"name": "Portfolio Optimization", "published": true, "source": "/work/portfolio-risk-decision-engine/"},
         {"name": "Monte Carlo Simulation", "published": false, "source": ""},
-        {"name": "Walk-forward Backtesting", "published": false, "source": ""},
+        {"name": "Walk-forward Backtesting", "published": true, "source": "/work/portfolio-risk-decision-engine/"},
         {"name": "Statistical Modeling", "published": false, "source": ""},
         {"name": "Regression Analysis", "published": false, "source": ""}
       ]

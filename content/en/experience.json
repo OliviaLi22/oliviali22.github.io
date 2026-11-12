@@ -1,12 +1,14 @@
 [
   {
     "area": "Investment Risk",
+    "tone": "sage",
     "period": "January 2026–Present",
     "description": "Portfolio risk analytics, investment risk oversight, stress testing, and quantitative reporting.",
     "focus": ["Portfolio Risk", "Tracking Error", "Risk-Adjusted Performance", "Exposure Analysis", "Stress Testing", "Python", "SQL"]
   },
   {
     "area": "Market Risk",
+    "tone": "terracotta",
     "period": "February 2024–December 2025",
     "description": "Market risk measurement, daily risk monitoring, P&L attribution, and analytical automation.",
     "focus": ["VaR", "Market Risk", "P&L Attribution", "Python", "SQL", "Tableau"]

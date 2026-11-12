@@ -1,10 +1,11 @@
 ---
 title: Equity Quant Research Platform
-summary: A planned framework for asking reproducible questions of equity data and making research assumptions inspectable.
+summary: A research direction for point-in-time equity data, comparable signals, and auditable backtests.
 question: What would a transparent research environment need to compare equity signals fairly through time?
-approach: Planned point-in-time data rules, factor-based research, backtesting, and reproducible reporting.
+approach: Point-in-time data rules, factor-based research, backtesting, and reproducible reporting.
 field: Equity research / data
 status: Planned concept
+stage: planned
 order: 2
 repository:
 ---

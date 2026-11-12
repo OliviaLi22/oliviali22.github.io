@@ -28,7 +28,7 @@ Content is in paired `content/en/` and `content/zh/` folders. Each `.md` file be
 | Beyond Work | Edit `content/{en,zh}/pages/about-beyond.md` | `/about/`, `/zh/about/` |
 | Photography | Add images to `assets/`; edit `content/{en,zh}/photos.json` | `/photography/`, `/zh/photography/` |
 
-The sample journal article is a **layout preview**, not personal writing. The film archive currently lists *Resident Evil* (2026) and *You Can See Everything* (2026) as **awaiting review**, with no invented personal opinions. Copy `content/en/examples/film-note-template.md` to `content/en/film/` when writing a new review, then create its Chinese counterpart in `content/zh/film/`. Only files in the language-specific film folders are published. The two research briefs are explicitly marked as planned concepts. Add methods, documented results, visualizations, and repository links only as the work becomes available.
+The sample journal article is a **layout preview**, not personal writing. The film archive currently lists *Resident Evil* (2026) and *You Can See Everything* (2026) as **awaiting review**, with no invented personal opinions. Copy `content/en/examples/film-note-template.md` to `content/en/film/` when writing a new review, then create its Chinese counterpart in `content/zh/film/`. Only files in the language-specific film folders are published. Portfolio Risk Decision Engine is an implemented research prototype with a verified public repository; Equity Quant Research Platform remains a planned concept without a verified repository. Publish numerical results and charts only when their source data and assumptions can be reviewed.
 
 ### English and Chinese
 
@@ -38,13 +38,13 @@ To publish or edit a translation, open the matching files in `content/en/` and `
 
 ### Work page
 
-The Work page reads its two professional experience areas from `content/{en,zh}/experience.json`. Each entry has an `area`, `period`, one-sentence `description`, and compact `focus` list. These are areas of work, not separate formal job titles. The current formal title and employer appear in About instead. Do not add confidential employer details. The project cards read `question` and `approach` from each project's Markdown front matter; these are previews, while the full case studies live in the Markdown bodies. Both current projects are labeled as planned concepts, and their repository links stay blank until code is public.
+The Work page reads its two professional experience areas from `content/{en,zh}/experience.json`. Each entry has an `area`, `period`, one-sentence `description`, compact `focus` list, and a `tone` (`sage` or `terracotta`) for the accent color. These are areas of work, not separate formal job titles. The current formal title and employer appear in About instead. Do not add confidential employer details. Project cards read `question` and `approach` from each project's Markdown front matter; full case studies live in the Markdown bodies. Use `stage: planned` for concepts, `stage: prototype` for implemented research prototypes, and `stage: complete` only for documented finished work. Implemented stages require a verified public `repository` URL. An optional `pipeline` field uses `|` to separate documented implementation stages for the case-study diagram. Keep both language files aligned.
 
 The About introduction is in `content/{en,zh}/pages/about.md`; Beyond Work copy is in `content/{en,zh}/pages/about-beyond.md`. Its timeline is `content/{en,zh}/journey.json`, in **reverse chronological order**. Each entry has `years`, `location`, and `title`; `organization` and `description` are optional. Keep dates, locations, institutions, and employers factual. The Connect section links to the verified GitHub profile and the site's Contact page.
 
-The expertise categories and skill order live in `content/{en,zh}/expertise.json`. A toolkit item's `evidence` field is `role` when it is explicitly in the supplied role responsibilities, and `supplied` when it comes from the supplied skill list without a role-specific claim. The page displays these as **In professional roles** and **Additional toolkit** in English, with corresponding Chinese labels. This distinction does not assign a proficiency score.
+The expertise categories and skill order live in `content/{en,zh}/expertise.json`. A toolkit item's `evidence` field is `role` when it is explicitly in the supplied role responsibilities, and `supplied` when it comes from the supplied skill list without a role-specific claim. The page displays these as **In professional roles** and **Additional toolkit** in English, with corresponding Chinese labels. `core: true` adds typographic emphasis within that evidence group; it does not change the evidence level or assign a proficiency score.
 
-Quantitative Research Methods are kept in the same files with `published: false`, so their names do not appear on the public page. Change one to `published: true` in each language only after it is supported by an implemented case study (`source: /work/project-slug/`) or confirmed experience (`confirmed: true`). The build rejects a published research method without either form of support.
+Quantitative Research Methods are kept in the same files. Portfolio Optimization and Walk-forward Backtesting now have `published: true` with the implemented Portfolio Risk Decision Engine as their source; other draft methods remain unpublished. Change another method to `published: true` in each language only after it is supported by an implemented case study (`source: /work/project-slug/`) or confirmed experience (`confirmed: true`). The build rejects a published research method without either form of support.
 
 ### Front matter examples
 
@@ -85,7 +85,7 @@ Your spoiler-free review begins here.
 Plot-specific thoughts go here. This section becomes a collapsed panel.
 ```
 
-All fields are plain text. `date` uses `YYYY-MM-DD`. `year`, `watched`, `rating`, and `repository` are optional. To add a project, copy a file in `content/en/work/`, then add a matching file in `content/zh/work/`; update their front matter and fill in the section prompts. Use `order: 3` to place it after the current projects. Its `repository` field should be a full URL only when the code exists publicly.
+All fields are plain text. `date` uses `YYYY-MM-DD`. `year`, `watched`, and `rating` are optional. To add a project, copy a file in `content/en/work/`, then add a matching file in `content/zh/work/`; update their front matter and fill in the section prompts. Use `order: 3` to place it after the current projects. Start with `stage: planned` and an empty `repository`; an implemented stage requires a verified public repository URL.
 
 The builder supports headings (`##`, `###`), paragraphs, bold, italics, links, inline code, lists, blockquotes, and horizontal rules. Keep one metadata field per line. HTML inside Markdown is escaped for safety. The spoiler marker is the only special comment. For an optional article cover, add `cover: /assets/your-image.webp` and `cover_alt: A useful description` to its front matter.
 
@@ -126,7 +126,7 @@ The workflow deploys only after a push to `main` or a manual run on `main`. This
 - `translations.py`: shared interface translations
 - `content/{en,zh}/experience.json`: two dated professional experience areas on Work
 - `content/{en,zh}/journey.json`: reverse chronological About timeline
-- `content/{en,zh}/expertise.json`: technical toolkit and unpublished research-method drafts
+- `content/{en,zh}/expertise.json`: technical toolkit and evidence-linked research methods
 - `preview.py`: one-command local build and preview server
 - `templates/base.html`: shared page shell, metadata, navigation, and footer
 - `assets/site.css`: design system and responsive layouts

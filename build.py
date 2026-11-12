@@ -311,7 +311,7 @@ def home(projects: list[dict], journal: list[dict], photos: list[dict]) -> str:
         <div class="hero-bottom"><span>Finance &amp; research</span><span>Cinema &amp; observations</span><span>Elsewhere, in between</span></div>
       </section>
       <section class="section work-section" aria-labelledby="selected-work"><div class="wrap">
-        {section_head('01 / Work & research', '<span id="selected-work">Questions worth testing.</span>', 'Research directions in portfolio risk and equity analysis.')}
+        {section_head('01 / Work & research', '<span id="selected-work">Questions worth testing.</span>', 'An implemented risk workflow and a planned equity research direction.')}
         <div class="project-list">{rows}</div><div class="section-end">{link('/work/', 'All work & research')}</div>
       </div></section>
       <section class="section journal-section" aria-labelledby="journal-title"><div class="wrap journal-layout">
@@ -331,15 +331,16 @@ def home(projects: list[dict], journal: list[dict], photos: list[dict]) -> str:
     </main>'''
 
 
-def page_intro(kicker: str, title: str, description: str) -> str:
-    return f'<header class="page-intro wrap"><p class="eyebrow">{esc(kicker)}</p><h1>{title}</h1><p class="page-lede">{esc(description)}</p></header>'
+def page_intro(kicker: str, title: str, description: str, extra_class: str = "") -> str:
+    classes = "page-intro wrap" + (f" {extra_class}" if extra_class else "")
+    return f'<header class="{classes}"><p class="eyebrow">{esc(kicker)}</p><h1>{title}</h1><p class="page-lede">{esc(description)}</p></header>'
 
 
 def experience_section(roles: list[dict]) -> str:
     entries = []
     for role in roles:
         focus = " · ".join(esc(item) for item in role["focus"])
-        entries.append(f'''<article class="experience-area"><div class="experience-area-heading"><p class="timeline-period">{esc(role['period'])}</p><h3>{esc(role['area'])}</h3></div>
+        entries.append(f'''<article class="experience-area experience-area--{esc(role['tone'])}"><div class="experience-area-heading"><p class="timeline-period">{esc(role['period'])}</p><h3>{esc(role['area'])}</h3></div>
           <div class="experience-area-copy"><p>{esc(role['description'])}</p><p class="experience-focus-line"><span>Focus</span>{focus}</p></div></article>''')
     return f'''<section class="work-experience work-block" aria-labelledby="experience-title"><div class="wrap">
       <div class="work-heading"><p class="eyebrow">01 / Professional experience</p><h2 id="experience-title">A foundation in<br><em>financial risk.</em></h2>
@@ -349,11 +350,15 @@ def experience_section(roles: list[dict]) -> str:
 
 def case_study_card(item: dict, number: int) -> str:
     path = f"/work/{item['slug']}/"
-    return f'''<article class="case-card"><div class="case-card-meta"><span>0{number} / {esc(item.get('status', 'Planned concept'))}</span><span>{esc(item.get('field', 'Research'))}</span></div>
-      <h3><a href="{path}">{esc(item['title'])}</a></h3><p class="case-summary">{esc(item['summary'])}</p>
-      <dl><dt>Research question</dt><dd>{esc(item['question'])}</dd>
-      <dt>Methodology preview</dt><dd>{esc(item['approach'])}</dd></dl>
-      {link(path, 'Explore case study')}</article>'''
+    source = link(item["repository"], "View source code") if item.get("repository") else ""
+    method_label = ("Translation pending" if item.get("translation_missing") else
+                    "Proposed method" if item.get("stage") == "planned" else "Implemented method")
+    return f'''<article class="case-card case-card--{esc(item['stage'])}"><div class="case-card-meta"><span>0{number} / {esc(item.get('field', 'Research'))}</span><span class="case-status">{esc(item['status'])}</span></div>
+      <h3><a href="{path}">{esc(item['title'])}</a></h3>
+      <div class="case-question"><p class="case-label">Research question</p><p>{esc(item['question'])}</p></div>
+      <p class="case-summary">{esc(item['summary'])}</p>
+      <div class="case-method"><p class="case-label">{method_label}</p><p>{esc(item['approach'])}</p></div>
+      <div class="case-card-links">{link(path, 'Explore case study')}{source}</div></article>'''
 
 
 def expertise_section(expertise: dict) -> str:
@@ -381,24 +386,23 @@ def expertise_section(expertise: dict) -> str:
                 name = esc(skill["name"])
                 if skill.get("source"):
                     name = f'<a href="{esc(skill["source"])}">{name}</a>'
-                items.append(f"<li>{name}</li>")
+                items.append(f'<li class="{"is-core" if skill.get("core") or category["kind"] == "research" else "is-secondary"}">{name}</li>')
             skill_groups.append(f'<div class="skill-group"><p class="skill-context">{esc(label)}</p><ul class="skill-tags">{"".join(items)}</ul></div>')
-        cards.append(f'''<article class="expertise-card"><div class="expertise-card-top"><span>0{number}</span><h3>{esc(category['title'])}</h3></div>
+        cards.append(f'''<article class="expertise-card expertise-card--{esc(category['kind'])}"><div class="expertise-card-top"><span>0{number}</span><h3>{esc(category['title'])}</h3></div>
           {''.join(skill_groups)}</article>''')
     return f'''<section class="expertise-section work-block" aria-labelledby="expertise-title"><div class="wrap">
       <div class="work-heading"><p class="eyebrow">03 / Technical Expertise &amp; Toolkit</p><h2 id="expertise-title">The working<br><em>toolkit.</em></h2>
       <p>Financial domain knowledge, analytical programming, and the systems used to examine portfolio risk.</p></div>
-      <p class="expertise-key">“In professional roles” reflects the professional responsibilities supplied for this site. “Additional toolkit” comes from the supplied skill list without assigning a proficiency level or employer context.</p>
       <div class="expertise-grid">{''.join(cards)}</div>{research_note}</div></section>'''
 
 
 def work_index(projects: list[dict], roles: list[dict], expertise: dict) -> str:
     cards = "".join(case_study_card(item, i) for i, item in enumerate(projects, 1))
-    return f'''<main id="main">{page_intro('Work & research', 'Risk, research,<br><em>and the work between.</em>', 'Financial risk analytics, analytical programming, and independent research questions. Professional responsibilities and planned project work are presented separately.')}
+    return f'''<main id="main">{page_intro('Work & research', 'Risk, research,<br><em>and the work between.</em>', 'Exploring financial risk, portfolio analytics, and quantitative research through data, models, and code.', 'work-page-intro')}
       {experience_section(roles)}
       <section class="work-projects work-block" aria-labelledby="projects-title"><div class="wrap">
         <div class="work-heading"><p class="eyebrow">02 / Selected projects</p><h2 id="projects-title">Questions worth<br><em>testing.</em></h2>
-        <p>Two independent research directions. Both case studies are planned concepts; implementation and findings will be added when documented.</p></div>
+        <p>Independent studies in portfolio risk and equity research.</p></div>
         <div class="case-grid">{cards}</div></div></section>
       {expertise_section(expertise)}</main>'''
 
@@ -406,13 +410,15 @@ def work_index(projects: list[dict], roles: list[dict], expertise: dict) -> str:
 def project_detail(item: dict) -> str:
     repo = item.get("repository", "")
     repo_html = link(repo, "View repository") if repo else '<span class="muted">Repository link will be added when available.</span>'
-    result_placeholder = '''<div class="result-placeholder"><span class="eyebrow">Results & visualizations</span><div class="chart-grid" aria-hidden="true"></div><p>Reserved for documented results and charts. No findings are claimed yet.</p></div>''' if item.get("status", "").lower().startswith("planned") or item.get("status") == "规划中的构想" else ""
+    steps = [step.strip() for step in item.get("pipeline", "").split("|") if step.strip()]
+    pipeline = (f'<section class="project-pipeline" aria-label="Implementation pathway"><p class="eyebrow">Implementation pathway</p><ol>{"".join(f"<li>{esc(step)}</li>" for step in steps)}</ol></section>' if steps else "")
+    kicker = "Research brief / " if item.get("stage") == "planned" else "Case study / "
     return f'''<main id="main"><div class="wrap breadcrumb"><a href="/work/">← All work</a><span> / {esc(item['title'])}</span></div>
-      {page_intro('Research brief / ' + item.get('status', 'Planned concept'), esc(item['title']), item.get('summary', ''))}
+      {page_intro(kicker + item.get('status', 'Planned concept'), esc(item['title']), item.get('summary', ''))}
       <div class="wrap detail-grid"><aside class="detail-sidebar"><p class="eyebrow">At a glance</p><dl>
         <dt>Area</dt><dd>{esc(item.get('field', 'Research'))}</dd><dt>Status</dt><dd>{esc(item.get('status', 'Planned concept'))}</dd>
         <dt>Code</dt><dd>{repo_html}</dd></dl></aside>
-        <article class="prose">{markdown(item['body'])}{result_placeholder}</article></div></main>'''
+        <article class="prose">{pipeline}{markdown(item['body'])}</article></div></main>'''
 
 
 def journal_index(items: list[dict]) -> str:
@@ -530,8 +536,9 @@ def missing_translation(item: dict, section: str) -> dict:
                       f"[阅读英文原文](https://byxiaoyu.com/{section}/{item['slug']}/)")
     result["category"] = "翻译待补充"
     result["tags"] = "翻译待补充"
+    result["translation_missing"] = True
     if section == "work":
-        result.update(status="翻译待补充", field="研究", question="中文译文待补充。", approach="请阅读英文原文。")
+        result.update(status="翻译待补充", field="研究", question="中文译文待补充。", approach="请阅读英文原文。", pipeline="")
     if section == "film":
         result["status"] = "影评待写" if item.get("status") == "Awaiting review" else "翻译待补充"
     return result
@@ -647,9 +654,15 @@ def main() -> None:
         for item in data["projects"]:
             if not item.get("question") or not item.get("approach"):
                 raise ValueError(f"Missing {lang} research question or methodology preview in {item['slug']}")
+            if item.get("stage") not in ("planned", "prototype", "complete"):
+                raise ValueError(f"Project {item['slug']} needs a planned, prototype, or complete stage")
+            if item["stage"] != "planned" and not item.get("repository"):
+                raise ValueError(f"Implemented project {item['slug']} needs a verified repository")
         for role in data["roles"]:
             if not all(role.get(key) for key in ("area", "period", "description", "focus")):
                 raise ValueError(f"{lang} experience areas need area, period, description, and focus")
+            if role.get("tone") not in ("sage", "terracotta"):
+                raise ValueError(f"{lang} experience area {role['area']} needs a supported tone")
         for entry in data["journey"]:
             if not all(entry.get(key) for key in ("years", "location", "title")):
                 raise ValueError(f"{lang} journey entries need years, location, and title")

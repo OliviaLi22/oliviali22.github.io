@@ -3,29 +3,29 @@
     {
       "title": "编程与数据工程", "kind": "toolkit",
       "skills": [
-        {"name":"Python","evidence":"role"},
-        {"name":"pandas / NumPy","evidence":"supplied"},
+        {"name":"Python","evidence":"role","core":true},
+        {"name":"pandas / NumPy","evidence":"supplied","core":true},
         {"name":"面向对象编程（OOP）","evidence":"supplied"},
-        {"name":"SQL","evidence":"role"},
-        {"name":"PySpark","evidence":"supplied"},
+        {"name":"SQL","evidence":"role","core":true},
+        {"name":"PySpark","evidence":"supplied","core":true},
         {"name":"Git / 版本控制","evidence":"supplied"},
         {"name":"Jupyter / JupyterHub","evidence":"supplied"},
-        {"name":"数据处理与报表自动化","evidence":"supplied"}
+        {"name":"数据处理与报表自动化","evidence":"supplied","core":true}
       ]
     },
     {
       "title": "量化风险与投资组合分析", "kind": "toolkit",
       "skills": [
-        {"name":"市场风险","evidence":"role"},
-        {"name":"投资风险 / 投资组合风险","evidence":"role"},
-        {"name":"风险价值（VaR）","evidence":"role"},
+        {"name":"市场风险","evidence":"role","core":true},
+        {"name":"投资风险 / 投资组合风险","evidence":"role","core":true},
+        {"name":"风险价值（VaR）","evidence":"role","core":true},
         {"name":"预期损失（ES）","evidence":"supplied"},
-        {"name":"压力测试与情景分析","evidence":"role"},
-        {"name":"跟踪误差（TE）","evidence":"role"},
+        {"name":"压力测试与情景分析","evidence":"role","core":true},
+        {"name":"跟踪误差（TE）","evidence":"role","core":true},
         {"name":"夏普比率 / 信息比率（IR）","evidence":"role"},
-        {"name":"投资组合敞口分析","evidence":"role"},
+        {"name":"投资组合敞口分析","evidence":"role","core":true},
         {"name":"风险敏感度","evidence":"role"},
-        {"name":"损益归因","evidence":"role"},
+        {"name":"损益归因","evidence":"role","core":true},
         {"name":"风险监控 / 关键风险指标（KRI）","evidence":"role"},
         {"name":"投资组合绩效分析","evidence":"supplied"}
       ]
@@ -56,9 +56,9 @@
       "title": "量化研究方法", "kind": "research",
       "skills": [
         {"name":"因子模型","published":false,"source":""},
-        {"name":"投资组合优化","published":false,"source":""},
+        {"name":"投资组合优化","published":true,"source":"/work/portfolio-risk-decision-engine/"},
         {"name":"蒙特卡洛模拟","published":false,"source":""},
-        {"name":"滚动回测","published":false,"source":""},
+        {"name":"滚动回测","published":true,"source":"/work/portfolio-risk-decision-engine/"},
         {"name":"统计建模","published":false,"source":""},
         {"name":"回归分析","published":false,"source":""}
       ]
