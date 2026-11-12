@@ -1,0 +1,30 @@
+[
+  {
+    "file": "/assets/frame-city.svg",
+    "caption": "City studies",
+    "category": "cities",
+    "alt": "Abstract architectural illustration marking a future photograph",
+    "placeholder": true
+  },
+  {
+    "file": "/assets/frame-light.svg",
+    "caption": "Light & shadow",
+    "category": "everyday",
+    "alt": "Abstract light and shadow illustration marking a future photograph",
+    "placeholder": true
+  },
+  {
+    "file": "/assets/frame-horizon.svg",
+    "caption": "Horizons",
+    "category": "travel",
+    "alt": "Abstract horizon illustration marking a future photograph",
+    "placeholder": true
+  },
+  {
+    "file": "/assets/frame-window.svg",
+    "caption": "Through a window",
+    "category": "everyday",
+    "alt": "Abstract window illustration marking a future photograph",
+    "placeholder": true
+  }
+]

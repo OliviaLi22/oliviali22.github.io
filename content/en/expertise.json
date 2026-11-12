@@ -1,0 +1,72 @@
+{
+  "categories": [
+    {
+      "title": "Programming & Data Engineering",
+      "kind": "toolkit",
+      "skills": [
+        {"name": "Python", "evidence": "role"},
+        {"name": "pandas / NumPy", "evidence": "supplied"},
+        {"name": "Object-Oriented Programming (OOP)", "evidence": "supplied"},
+        {"name": "SQL", "evidence": "role"},
+        {"name": "PySpark", "evidence": "supplied"},
+        {"name": "Git / Version Control", "evidence": "supplied"},
+        {"name": "Jupyter / JupyterHub", "evidence": "supplied"},
+        {"name": "Data processing and reporting automation", "evidence": "supplied"}
+      ]
+    },
+    {
+      "title": "Quantitative Risk & Portfolio Analytics",
+      "kind": "toolkit",
+      "skills": [
+        {"name": "Market Risk", "evidence": "role"},
+        {"name": "Investment / Portfolio Risk", "evidence": "role"},
+        {"name": "Value at Risk (VaR)", "evidence": "role"},
+        {"name": "Expected Shortfall (ES)", "evidence": "supplied"},
+        {"name": "Stress Testing and Scenario Analysis", "evidence": "role"},
+        {"name": "Tracking Error (TE)", "evidence": "role"},
+        {"name": "Sharpe Ratio / Information Ratio (IR)", "evidence": "role"},
+        {"name": "Portfolio Exposure Analysis", "evidence": "role"},
+        {"name": "Risk Sensitivities", "evidence": "role"},
+        {"name": "P&L Attribution", "evidence": "role"},
+        {"name": "Risk Monitoring / KRIs", "evidence": "role"},
+        {"name": "Portfolio Performance Analytics", "evidence": "supplied"}
+      ]
+    },
+    {
+      "title": "Databases & Business Intelligence",
+      "kind": "toolkit",
+      "skills": [
+        {"name": "Oracle SQL", "evidence": "supplied"},
+        {"name": "Hive / Impala", "evidence": "supplied"},
+        {"name": "Teradata", "evidence": "supplied"},
+        {"name": "HDFS / Parquet", "evidence": "supplied"},
+        {"name": "Tableau", "evidence": "role"},
+        {"name": "Microsoft Excel", "evidence": "supplied"},
+        {"name": "Toad for Oracle", "evidence": "supplied"}
+      ]
+    },
+    {
+      "title": "Financial Risk Platforms",
+      "kind": "toolkit",
+      "skills": [
+        {"name": "MSCI BarraOne", "evidence": "supplied"},
+        {"name": "BlackRock Aladdin", "evidence": "supplied"},
+        {"name": "RiskMetrics", "evidence": "supplied"},
+        {"name": "MorningStar Direct", "evidence": "supplied"},
+        {"name": "Bloomberg", "evidence": "supplied"}
+      ]
+    },
+    {
+      "title": "Quantitative Research Methods",
+      "kind": "research",
+      "skills": [
+        {"name": "Factor Models", "published": false, "source": ""},
+        {"name": "Portfolio Optimization", "published": false, "source": ""},
+        {"name": "Monte Carlo Simulation", "published": false, "source": ""},
+        {"name": "Walk-forward Backtesting", "published": false, "source": ""},
+        {"name": "Statistical Modeling", "published": false, "source": ""},
+        {"name": "Regression Analysis", "published": false, "source": ""}
+      ]
+    }
+  ]
+}

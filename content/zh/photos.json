@@ -1,0 +1,6 @@
+[
+  {"file":"/assets/frame-city.svg","caption":"城市速写","category":"cities","alt":"为未来照片预留位置的抽象建筑插画","placeholder":true},
+  {"file":"/assets/frame-light.svg","caption":"光与影","category":"everyday","alt":"为未来照片预留位置的抽象光影插画","placeholder":true},
+  {"file":"/assets/frame-horizon.svg","caption":"地平线","category":"travel","alt":"为未来照片预留位置的抽象地平线插画","placeholder":true},
+  {"file":"/assets/frame-window.svg","caption":"窗外","category":"everyday","alt":"为未来照片预留位置的抽象窗景插画","placeholder":true}
+]

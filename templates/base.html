@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="$html_lang">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f3ec">
+  <title>$title</title>
+  <meta name="description" content="$description">
+  $robots
+  <link rel="canonical" href="$canonical">
+  $alternates
+  <meta property="og:type" content="$og_type">
+  <meta property="og:locale" content="$og_locale">
+  <meta property="og:title" content="$title">
+  <meta property="og:description" content="$description">
+  <meta property="og:url" content="$canonical">
+  <meta property="og:site_name" content="byxiaoyu.">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css">
+  $language_script
+</head>
+<body>
+  <a class="skip-link" href="$skip_target">$skip_label</a>
+  <header class="site-header"><div class="wrap header-inner">
+    <a class="brand" href="$home_url" aria-label="$home_label">byxiaoyu<span>.</span></a>
+    <nav class="main-nav" aria-label="$nav_label">$nav</nav>
+  </div></header>
+  $body
+  <footer class="site-footer"><div class="wrap footer-inner">
+    <div><a class="brand" href="$home_url">byxiaoyu<span>.</span></a><p>$footer_intro</p></div>
+    <div class="footer-links">$footer_nav</div>
+    <div class="footer-end"><a href="https://github.com/OliviaLi22" rel="me">GitHub ↗</a><span>© $year Olivia Li</span></div>
+  </div><nav class="wrap footer-languages" aria-label="$language_label"><a href="$en_url" lang="en" data-language="en"$en_current>English</a><span aria-hidden="true">·</span><a href="$zh_url" lang="zh-CN" data-language="zh"$zh_current>中文</a></nav></footer>
+  $gate_script
+  $analytics
+</body>
+</html>
