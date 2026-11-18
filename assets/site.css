@@ -74,12 +74,10 @@ html[lang="zh-CN"] .eyebrow,html[lang="zh-CN"] .item-meta,html[lang="zh-CN"] .ta
 .work-experience .work-heading{margin-bottom:39px}
 .experience-areas{display:grid;gap:15px;border-top:0}
 .experience-area{--experience-accent:#78947E;--experience-date:#496d53;grid-template-columns:minmax(190px,.7fr) minmax(0,1.3fr);gap:6%;background:#edf2eb;border-left:3px solid var(--experience-accent);border-bottom:1px solid #d5dfd2;padding:31px 34px}
-.experience-area--terracotta{--experience-accent:#B67D65;--experience-date:#8d5843;background:#f4ece7;border-bottom-color:#e5d6ce}
 .experience-area .timeline-period{color:var(--experience-date);font-size:12px;letter-spacing:.08em;padding:0;margin:0 0 13px}
 .experience-area h3{font-size:clamp(31px,3.3vw,43px)}
 .experience-area-copy>p:first-child{font-size:20px;margin-bottom:21px}
 .experience-focus-line{border-top-color:#bfcbbd}
-.experience-area--terracotta .experience-focus-line{border-top-color:#dcc9bd}
 
 .case-grid{gap:21px}
 .case-card{min-height:0;padding:29px 31px 30px;border-top-color:#78947E}
@@ -104,11 +102,9 @@ html[lang="zh-CN"] .eyebrow,html[lang="zh-CN"] .item-meta,html[lang="zh-CN"] .ta
 .expertise-card-top{margin-bottom:21px}
 .skill-group+.skill-group{margin-top:17px}
 .skill-context{margin-bottom:7px}
-.skill-tags{gap:0 1px}
-.skill-tags li{border:0;background:transparent;padding:0;color:#66746a;font-size:13px;line-height:1.75}
-.skill-tags li.is-core{color:#2e4b38;font-weight:700}
-.skill-tags li:not(:last-child)::after{content:"·";color:#9aa99c;margin:0 8px;font-weight:400}
-.skill-tags li a{text-decoration:underline;text-underline-offset:3px}
+.skill-tags{gap:8px}
+.skill-tags li{max-width:100%;border:1px solid var(--line);border-radius:4px;background:transparent;padding:5px 9px;color:#536457;font-size:13px;font-weight:400;line-height:1.35;overflow-wrap:anywhere}
+.skill-tags li a{color:inherit;font-weight:inherit;text-decoration:none}
 .expertise-card--research{grid-column:1/-1;max-width:720px}
 
 .project-pipeline{font-family:var(--sans);border-top:2px solid var(--ink);border-bottom:1px solid var(--line);background:#eff2ea;padding:20px 22px 24px;margin:0 0 43px}
